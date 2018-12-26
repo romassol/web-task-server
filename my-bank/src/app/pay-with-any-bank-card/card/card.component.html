@@ -1,0 +1,8 @@
+<!--<p> card number: {{card.number}}</p>-->
+<img class="pay__systems" src="../../../assets/img/pay-systems.png" alt="pay-systems">
+<input pattern="\d{16}" [(ngModel)]="card.number" name="card" id="card" class="card__number" type="text" placeholder="Номер карты" required>
+<section class="card__date-and-cvc">
+  <input [(ngModel)]="card.date" name="date" id="card__date" class="card__date" type="text" placeholder="MM/ГГ" pattern="((0[1-9])|(1[0-2]))\/((1[7-9])|(2\d)|(3[0-5]))" required>
+  <input [(ngModel)]="card.cvc" class="card__cvc" type="text" placeholder="CVC" pattern="\d{3}" required>
+</section>
+

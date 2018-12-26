@@ -1,0 +1,51 @@
+<form (ngSubmit)="getFile()" class="pay" name="pay">
+    <section class="pay__nav">
+        <p>Заплатить</p>
+        <a routerLink="/request-payment">Запросить платеж</a>
+    </section>
+
+    <section class="pay__way">
+        <a routerLink="">С карты любого банка</a>
+        <p class="pay__way_boxed">Из своего интернет-банка</p>
+    </section>
+
+    <section class="pay__information">
+        <p>Сформируйте платежку и загрузите ее в свой банк для подписи</p>
+
+        <section class="input-line">
+            <p>От кого</p>
+            <input [(ngModel)]="internetBankFile.itn" [ngModelOptions]="{standalone: true}" type="text" placeholder="ИНН или название платильщика" id="input-from" pattern="(^\d{10}$)|(^\d{12}$)" required>
+        </section>
+
+        <section class="input-line not-bottom-line">
+            <p>БИК</p>
+            <input [(ngModel)]="internetBankFile.bik" [ngModelOptions]="{standalone: true}" type="text" id="input-bik" pattern="^\d{9}$" required>
+        </section>
+
+        <section class="input-line">
+            <p>Номер счета</p>
+            <input [(ngModel)]="internetBankFile.accountNumber" [ngModelOptions]="{standalone: true}" type="text" id="input-score" pattern="^\d{20}$" required>
+        </section>
+
+        <section class="input-line">
+            <p>За что</p>
+            <section class="purpose-payment">
+                <span>Назначение платежа</span>
+                <input [(ngModel)]="internetBankFile.forWhat" [ngModelOptions]="{standalone: true}" type="text" value="без НДС" id="input-purpose-payment" pattern="(^без НДС$)|(^НДС 18%$)/(^НДС 10%$)" required>
+                <section class="vat">
+                    <a href="#">НДС 18%</a>
+                    <a href="#">НДС 10%</a>
+                    <p>Без НДС</p>
+                </section>
+            </section>
+        </section>
+
+        <section class="input-line">
+            <p>Сколько</p>
+            <input [(ngModel)]="internetBankFile.howMuch" [ngModelOptions]="{standalone: true}" type="text" id="input-how-much" pattern="(^[1-9]\d{3}$)|(^[1-6]\d{4}$)|(^7[0-4]\d{3}$)|(^75000$)" required>
+        </section>
+
+        <button type="submit"><span></span>Получить файл для интернет-банка</button>
+        <input class="clear" type="reset" value="Очистить форму">
+    </section>
+</form>

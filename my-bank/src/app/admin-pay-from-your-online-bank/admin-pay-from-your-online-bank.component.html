@@ -1,0 +1,36 @@
+<nav class="pay-nav">
+  <p>Платежи с карты</p>
+  <a routerLink="../admin-request-payment">Запрошенные платежи</a>
+</nav>
+<section class="pay-way">
+  <a routerLink="../">С карты любого банка</a>
+  <p class="pay-way_boxed">Из своего интернет банка</p>
+  <form (submit)="filter($event)">
+    <input type="text" placeholder="Поиск по account number">
+    <input type="submit" value="find">
+  </form>
+  <select (change)="sort($event.target.value)">
+    <option value="default">Отсортировать по</option>
+    <option value="byAmountAscending">По сумме ↑</option>
+    <option value="byAmountDescending">По сумме ↓</option>
+    <option value="byAccountNumberAscending">По номеру счета ↑</option>
+    <option value="byAccountNumberDescending">По номеру счета ↓</option>
+  </select>
+</section>
+<table>
+  <tr>
+    <th>ITN</th>
+    <th>BIK</th>
+    <th>Account number</th>
+    <th>For what</th>
+    <th>How much</th>
+  </tr>
+  <tr *ngFor="let x of internetBankPayments">
+    <td>{{ x.itn }}</td>
+    <td>{{ x.bik }}</td>
+    <td>{{ x.account_number }}</td>
+    <td>{{ x.for_what }}</td>
+    <td>{{ x.how_much }}</td>
+  </tr>
+</table>
+

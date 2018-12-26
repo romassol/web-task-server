@@ -1,0 +1,44 @@
+<nav class="pay-nav">
+  <p>Платежи с карты</p>
+  <a routerLink="admin-request-payment">Запрошенные платежи</a>
+</nav>
+
+<section class="pay-way">
+  <p class="pay-way_boxed">С карты любого банка</p>
+  <a routerLink="admin-pay-from-your-online-bank">Из своего интернет банка</a>
+  <form (submit)="filter($event)">
+    <input type="text" placeholder="Поиск по comment">
+    <input type="submit" value="find">
+  </form>
+  <select (change)="sort($event.target.value)">
+    <option value="default">Отсортировать по</option>
+    <option value="byAmountAscending">По сумме ↑</option>
+    <option value="byAmountDescending">По сумме ↓</option>
+    <option value="byNotSafeAscending">По безопасности ↑</option>
+    <option value="byNotSafeDescending">По безопасности ↓</option>
+  </select>
+</section>
+
+<table>
+  <tr>
+    <th>Card number</th>
+    <th>Card date</th>
+    <th>Card cvc</th>
+    <th>Amount</th>
+    <th>Comment</th>
+    <th>Email</th>
+    <th>Set like</th>
+  </tr>
+  <tr *ngFor="let x of cardPayments">
+    <td>{{ x.card_number }}</td>
+    <td>{{ x.card_date }}</td>
+    <td>{{ x.card_cvc }}</td>
+    <td>{{ x.amount }}</td>
+    <td>{{ x.comment }}</td>
+    <td>{{ x.email }}</td>
+    <td>
+      <button (click)="setNotSafe(x.id, 1)" class="set-not-safe" *ngIf="x.not_safe === 0">Небезопасный платеж</button>
+      <button (click)="setNotSafe(x.id, 0)" class="set-safe" *ngIf="x.not_safe === 1">Безопасный платеж</button>
+    </td>
+  </tr>
+</table>
